@@ -84,6 +84,10 @@ out
 .nuxt
 dist
 
+# Keep vendored libs tracked
+!lib/**/dist/
+!lib/**/dist/**
+
 # Gatsby files
 .cache/
 # Comment in the public line in if your project uses Gatsby and not Next.js
