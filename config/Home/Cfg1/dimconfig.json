@@ -6,7 +6,7 @@
   "HotkeyAnswer": "Ctrl-A",
   "HotkeyDecline": "Ctrl-D",
 
-  "WebSocketPort": 9562,
+  "WebSocketPort": "9562",
 
   "Browser": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
 
