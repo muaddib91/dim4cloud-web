@@ -1,0 +1,36 @@
+{
+  "type": "interactionSubscription",
+  "data": {
+    "category": "add",
+    "data": {
+      "ani": "+41585102626",
+      "attributes": {
+        "pt_searchvalue": "<my search>",
+        "pt_transfercontext": "<my context>",
+        "pt_urlpop": "<my popup>"
+      },
+      "calledNumber": "+41225183864",
+      "direction": "Inbound",
+      "displayAddress": "+41585102626",
+      "id": "b541610a-913d-4f0a-b778-99f7fd595fa0",
+      "isCallback": false,
+      "isChat": false,
+      "isConnected": false,
+      "isDialer": false,
+      "isDisconnected": false,
+      "isDone": false,
+      "isEmail": false,
+      "isInternal": false,
+      "isMessage": false,
+      "isVoicemail": false,
+      "name": "Switzerland",
+      "phone": "tel:+41585102626",
+      "queueName": "PrimeSoft Queue",
+      "recordingState": "active",
+      "remoteName": "Switzerland",
+      "securePause": false,
+      "state": "ALERTING",
+      "totalIvrDurationSeconds": 9
+    }
+  }
+}

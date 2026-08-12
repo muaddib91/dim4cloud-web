@@ -1,0 +1,8 @@
+{
+  "LoggedIn": "Connecté",
+  "OpenFullClient": "Ouvrir Genesys Cloud...",
+  "Reload": "Recharger l'application",
+  "Loading": "Chargement de la configuration...",
+  "ConfigLoaded": "Configuration chargée",
+  "SimulateCall": "simuler un appel entrant"
+}

@@ -1,0 +1,80 @@
+{
+  "ShowRingingToaster": true,
+
+  "ShowEmbeddedClient": true,
+
+  "HotkeyAnswer": "Ctrl-A",
+  "HotkeyDecline": "Ctrl-D",
+
+  "WebSocketPort": 9562,
+
+  "Browser": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+
+  "FullClient": {
+    "Command": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+    "Arguments": "--app=https://apps.mypurecloud.de/"
+  },
+
+  "ClipboardDialing": {
+    "Enabled": true,
+    "MaxLength": 100,
+    "AllowedCharacters": "0123456789+()",
+    "Regex": "^\\d{4,16}$",
+    "NewCallTimeout": 5000,
+    "TransferCallTimeout": 8000,
+    "Transformations": [
+      {
+        "Regex": "^\\+",
+        "Replacement": "00"
+      },
+      {
+        "Regex": "^\\(0\\)",
+        "Replacement": "0"
+      },
+      {
+        "Regex": "\\(0\\)",
+        "Replacement": ""
+      },
+      {
+        "Regex": "^0041",
+        "Replacement": "0"
+      }
+    ],
+    "FormatPatterns": [ "### ### ## ##", "#### ## ### ## ##" ]
+  },
+
+  "Notifications": [
+    {
+      "Type": "Browser",
+      "Name": "Browser Notification 1",
+      "CustomBrowserArgs": "--new-window",
+      "Filters": [
+        {
+          "Key": "data.data.direction",
+          "Value": "Inbound|Internal|Outbound"
+        },
+        {
+          "Key": "data.data.state",
+          "Value": "ALERTING"
+        },
+        {
+          "Key": "data.data.attributes.pt_searchvalue",
+          "Value": ".*"
+        },
+        {
+          "Key": "data.data.isChat",
+          "Value": "false"
+        },
+        {
+          "Key": "data.data.isEmail",
+          "Value": "false"
+        },
+        {
+          "Key": "data.data.isMessage",
+          "Value": "false"
+        }
+      ],
+      "Url": "https://www.local.ch/de/s/{data.data.ani}"
+    }
+  ]
+}

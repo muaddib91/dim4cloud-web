@@ -1,0 +1,129 @@
+{
+  "ShowRingingToaster": true,
+
+  "ShowEmbeddedClient":  true,
+
+  "HotkeyAnswer": "Ctrl-A",
+  "HotkeyDecline": "Ctrl-D",
+
+  "WebSocketPort": 9562,
+
+  "Browser": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+
+  "ClipboardDialing": {
+    "Enabled": true,
+    "MaxLength": 100,
+    "AllowedCharacters": "0123456789+()",
+    "Regex": "^\\d{4,16}$",
+    "NewCallTimeout": 5000,
+    "TransferCallTimeout": 8000,
+    "Transformations": [
+      {
+        "Regex": "^\\+",
+        "Replacement": "00"
+      },
+      {
+        "Regex": "^\\(0\\)",
+        "Replacement": "0"
+      },
+      {
+        "Regex": "\\(0\\)",
+        "Replacement": ""
+      },
+      {
+        "Regex": "^0041",
+        "Replacement": "0"
+      }
+    ],
+    "FormatPatterns": [ "### ### ## ##", "#### ## ### ## ##" ],
+    "TransferAttributes": ["pt_searchvalue", "pt_test"]
+  },
+
+  "Notifications": [
+    {
+      "Type": "Browser",
+      "Name": "Browser Notification 1",
+      "Filters": [
+        {
+          "Key": "data.data.direction",
+          "Value": "Inbound|Internal|Outbound"
+        },
+        {
+          "Key": "data.data.state",
+          "Value": "ALERTING"
+        },
+        {
+          "Key": "data.data.attributes.pt_searchvalue",
+          "Value": ".*"
+        }
+      ],
+      "Url": "https://www.local.ch/de/s/{data.data.ani}",
+      "TabUrl": "https://www.local.ch/.*"
+    }
+  ],
+
+  "TeamsIntegration": {
+    "Enabled": true,
+    "SyncRules": [
+      {
+        "Trigger": "Teams",
+        "Teams": "Busy/Busy",
+        "Genesys": "Busy/Test",
+        "Filter": "^(?!ON_QUEUE\/.*).*$"
+      },
+      {
+        "Trigger": "Teams",
+        "Teams": "Busy/on-the-phone",
+        "Genesys": "Busy",
+        "Filter": "^(?!ON_QUEUE\/.*).*$"
+      },
+      {
+        "Trigger": "Teams",
+        "Teams": "Busy/in-a-meeting",
+        "Genesys": "Meeting/Meeting",
+        "Filter": "^(?!ON_QUEUE\/.*).*$"
+      },
+      {
+        "Trigger": "Teams",
+        "Teams": "Busy/in-presentation",
+        "Genesys": "Meeting/Meeting",
+        "Filter": "^(?!ON_QUEUE\/.*).*$"
+      },
+      {
+        "Trigger": "Teams",
+        "Teams": "DoNotDisturb/*",
+        "Genesys": "Busy/Busy",
+        "Filter": "^(?!ON_QUEUE\/.*).*$"
+      },
+      {
+        "Trigger": "Teams",
+        "Teams": "Away/BeRightBack",
+        "Genesys": "Break/Break",
+        "Filter": "^(?!ON_QUEUE\/.*).*$"
+      },
+      {
+        "Trigger": "Teams",
+        "Teams": "Away/Away",
+        "Genesys": "Away/Away",
+        "Filter": "^(?!ON_QUEUE\/.*).*$"
+      },
+      {
+        "Trigger": "Teams",
+        "Teams": "Available/Free",
+        "Genesys": "Available",
+        "Filter": "^(?!ON_QUEUE\/.*).*$"
+      },
+
+      {
+        "Trigger": "Genesys",
+        "Genesys": "Busy",
+        "Teams": "Busy"
+      },
+      {
+        "Trigger": "Genesys",
+        "Genesys": "Available",
+        "Teams": "Clear"
+      }
+    ]
+  }
+}

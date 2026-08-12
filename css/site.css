@@ -1,0 +1,96 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    line-height: 1.5;
+}
+
+img, svg {
+    vertical-align: middle;
+}
+
+iframe {
+    border: 0;
+}
+
+.debug-only {
+    display: none;
+}
+
+.m-3 {
+    margin: 1rem !important;
+}
+
+.checklist {
+    margin-bottom: 10px;
+}
+
+    .checklist > div > span:first-child {
+        display: inline-block;
+        width: 20px;
+    }
+
+    .checklist > div > span:last-child {
+        color: lightgray;
+    }
+
+.topbtn {
+    float: right;
+    font-size: 20pt;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.topico {
+    float: right;
+    font-size: 20pt;
+    margin-left: 10px;
+}
+
+#lbl-lang, #lbl-cfg {
+    float: right;
+    font-size: 12pt;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+#lbl-loggedin, #lbl-config, #lbl-graphapi {
+    cursor: help;
+}
+
+#div-loading {
+    text-align: center;
+    font-size: 1.4em;
+    height: 450px;
+    min-height: 450px;
+    line-height: 400px;
+}
+
+#div-error {
+    background-color: #ffcccc;
+    border-bottom: 1px solid lightgray;
+    width: 100%;
+    padding-left: 5px;
+}
+
+#mainContainer small {
+    color: grey;
+}

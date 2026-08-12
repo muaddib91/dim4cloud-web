@@ -1,0 +1,8 @@
+{
+  "LoggedIn": "Logged in",
+  "OpenFullClient": "Open Genesys Cloud...",
+  "Reload": "Reload applikationn",
+  "Loading": "Loading configuration...",
+  "ConfigLoaded": "Configuration loaded",
+  "SimulateCall": "simulate incoming call"
+}

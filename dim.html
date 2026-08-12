@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<!--
+    Swisscom DIM 5.1.8
+    Copyright (c) by PrimeSoft AG
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DIM 5.x</title>
+    <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+    <div id="div-error" style="display:none;"></div>
+    <div class="m-3">
+        <div id="mainContainer" style="display:none;">
+            <div id="btn-reload" class="topbtn">
+                <span>&#10227;</span>
+            </div>
+            <div id="btn-open-client" class="topbtn">
+                <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path id="Vector" d="M10.0002 5H8.2002C7.08009 5 6.51962 5 6.0918 5.21799C5.71547 5.40973 5.40973 5.71547 5.21799 6.0918C5 6.51962 5 7.08009 5 8.2002V15.8002C5 16.9203 5 17.4801 5.21799 17.9079C5.40973 18.2842 5.71547 18.5905 6.0918 18.7822C6.5192 19 7.07899 19 8.19691 19H15.8031C16.921 19 17.48 19 17.9074 18.7822C18.2837 18.5905 18.5905 18.2839 18.7822 17.9076C19 17.4802 19 16.921 19 15.8031V14M20 9V4M20 4H15M20 4L13 11" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <div id="btn-teams" class="topico">
+                <img id="img-teams-ok" src="img/teams_24.png" style="display:none;" />
+                <img id="img-teams-gray" src="img/teams_24_gray.png" style="display:none;" />
+            </div>
+            <div id="btn-ring" class="topbtn debug-only">
+                <span>&#128379;</span>
+            </div>
+
+            <div class="checklist">
+                <div id="check-gen-login">
+                    <span></span><span id="lbl-loggedin"></span>
+                </div>
+                <div id="check-config">
+                    <span></span><span id="lbl-config"></span>
+                </div>
+                <div id="check-graphapi">
+                    <span></span><span id="lbl-graphapi">GraphApi</span>
+                </div>
+            </div>
+            <iframe id="iframe" height="450" width="100%" allow="camera *; microphone *; autoplay *; hid *; local-network-access *"></iframe>
+        </div>
+    </div>
+
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="js/logger.js?v=5.1.8"></script>
+    <script type="text/javascript" src="js/embedded-client.js?v=5.1.8"></script>
+    <script type="text/javascript">
+        const logger = new Logger("Main");
+        const webVersion = "5.1.8";
+
+        const supportedLanguages = ["de", "fr", "en"];
+        var envBaseUrl;
+        var genesysEmbeddedClient;
+
+        $(function () {
+
+            if (typeof (chrome) === "undefined" || typeof (chrome.webview) === "undefined") {
+                $("#mainContainer").html(`<h2>WebView2 not available</h2><p>This page must be loaded within WebView2!</p><hr><small>DIM-5 web ${webVersion}</small>`);
+                $("#mainContainer").show();
+                return;
+            }
+
+            logger.logInfo("Server version: " + webVersion);
+
+            setLanguage();
+            $("#mainContainer").show();
+
+            // disable context menu
+            window.addEventListener('contextmenu', window => { window.preventDefault(); });
+
+            // disable drag-and-drop
+            window.addEventListener('dragover', function (e) { e.preventDefault(); }, false);
+            window.addEventListener('drop', function (e) {
+                e.preventDefault();
+            }, false);
+
+            $("#btn-reload").on("click", () => {
+                logger.logInfo("Initiating manual reload...");
+                window.location.href = window.location.href;
+            });
+
+            $("#btn-open-client").on("click", () => {
+                postMessage({ type: "openFullClient", url: `https://apps.${envBaseUrl}` });
+            });
+
+            $("#btn-ring").on("click", () => {
+                logger.logInfo("Loading simulated call...");
+                $.ajax({
+                    url: "config/exampleAlertMessage.json",
+                    dataType: "json",
+                    cache: false,
+                    success: function (data) {
+                        logger.logInfo(data);
+                        postMessage(data);
+                    },
+                    error: function (jqxhr, textStatus, error) {
+                        logger.logError(`Failed to load example alert message: ${textStatus}`);
+                    }
+                });
+            });
+
+            $.ajax({
+                url: "config/environment.json",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    envBaseUrl = data.environment;
+                    logger.logInfo("Cloud environment: " + envBaseUrl);
+                    loadembeddedClient();
+                },
+                error: function (jqxhr, textStatus, error) {
+                    logger.logError("Failed to load environment from 'config/environment.json'.");
+                    showError("Failed to load environment from \"config/environment.json\".");
+                }
+            });
+        });
+
+        function loadembeddedClient() {
+            genesysEmbeddedClient = new EmbeddedClient(document.getElementById("iframe").contentWindow, envBaseUrl);
+            genesysEmbeddedClient.onLogin = () => {
+                setCheckList("check-gen-login", true);
+                document.getElementById("lbl-loggedin").setAttribute("title", envBaseUrl);
+                logger.logInfo("Logged in, requesting groups and presence status list...");
+                genesysEmbeddedClient.getAuthTokenAndData();
+            }
+            genesysEmbeddedClient.onConfig = (division, group) => {
+                postMessage({ type: "configReady", data: { division: division, group: group, envBaseUrl: envBaseUrl } });
+            }
+
+            logger.logDebug("Loading embedded framework and waiting for login...");
+            let iframeSrc = `https://apps.${envBaseUrl}/crm/embeddableFramework.html?dedicatedLoginWindow=true&enableFrameworkClientId=true`;
+            document.getElementById("iframe").setAttribute("src", iframeSrc);
+        }
+
+        function postMessage(msg) {
+            if (typeof (chrome) !== "undefined") {
+                chrome.webview.postMessage(msg);
+            }
+        }
+
+        function setConfigLoaded(path, showEmbeddedClient) {
+            setCheckList("check-config", true);
+            $("#lbl-config").attr("title", path);
+            if (showEmbeddedClient) {
+                $("#iframe").show();
+            } else {
+                $("#iframe").hide();
+            }
+        }
+
+        function setGraphApiStatus(success, user) {
+            setCheckList("check-graphapi", success);
+            $("#lbl-graphapi").attr("title", user);
+        }
+
+        function setTeamsStatus(connected) {
+            if (connected) {
+                $("#img-teams-gray").hide();
+                $("#img-teams-ok").show();
+            } else {
+                $("#img-teams-ok").hide();
+                $("#img-teams-gray").show();
+            }
+        }
+
+        function setCheckList(id, success) {
+            if (success) {
+                $("#" + id + ">span:first-child").html("&#10003;");
+                $("#" + id + ">span:first-child").css("color", "green");
+            } else {
+                $("#" + id + ">span:first-child").html("&#10007;");
+                $("#" + id + ">span:first-child").css("color", "red");
+            }
+            $("#" + id + ">span:last-child").css("color", "black");
+        }
+
+        function setDebugMode() {
+            logger.logInfo("Debug mode activated!");
+            $(".debug-only").show();
+        }
+
+        function setLanguage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            let lang = urlParams.get("language");
+            if (lang) {
+                lang = lang.substring(0, 2).toLowerCase();
+                if (supportedLanguages.indexOf(lang) === -1) {
+                    lang = supportedLanguages[0];
+                }
+            }
+
+            $.ajax({
+                url: `lang/${lang}.json`,
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $("#btn-reload").attr("title", data.Reload);
+                    $("#btn-open-client").attr("title", data.OpenFullClient);
+                    $("#btn-ring").attr("title", data.SimulateCall);
+                    $("#lbl-loggedin").text(data.LoggedIn);
+                    $("#lbl-config").text(data.ConfigLoaded);
+                },
+                error: function (jqxhr, textStatus, error) {
+                    logger.logError(`Failed to load translations from 'lang/${lang}.json'.`);
+                    showError(`Failed to load translations from 'lang/${lang}.json'.`);
+                }
+            });
+        }
+
+        function showError(msg) {
+            $("#iframe").attr("srcdoc", "<span style='font-family:Arial, Helvetica, sans-serif;color:red;'>" + msg + "</span>");
+        }
+
+    </script>
+</body>
+</html>
