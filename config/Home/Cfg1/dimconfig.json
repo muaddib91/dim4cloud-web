@@ -42,7 +42,70 @@
     ],
     "FormatPatterns": [ "### ### ## ##", "#### ## ### ## ##" ]
   },
+  "TeamsIntegration": {
+    "Enabled": true,
+    "SyncRules": [
+      {
+        "Trigger": "Teams",
+        "Teams": "Busy/Busy",
+        "Genesys": "Busy/Test",
+        "Filter": "^(?!ON_QUEUE\/.*).*$"
+      },
+      {
+        "Trigger": "Teams",
+        "Teams": "Busy/on-the-phone",
+        "Genesys": "Busy",
+        "Filter": "^(?!ON_QUEUE\/.*).*$"
+      },
+      {
+        "Trigger": "Teams",
+        "Teams": "Busy/in-a-meeting",
+        "Genesys": "Meeting/Meeting",
+        "Filter": "^(?!ON_QUEUE\/.*).*$"
+      },
+      {
+        "Trigger": "Teams",
+        "Teams": "Busy/in-presentation",
+        "Genesys": "Meeting/Meeting",
+        "Filter": "^(?!ON_QUEUE\/.*).*$"
+      },
+      {
+        "Trigger": "Teams",
+        "Teams": "DoNotDisturb/*",
+        "Genesys": "Busy/Busy",
+        "Filter": "^(?!ON_QUEUE\/.*).*$"
+      },
+      {
+        "Trigger": "Teams",
+        "Teams": "Away/BeRightBack",
+        "Genesys": "Break/Break",
+        "Filter": "^(?!ON_QUEUE\/.*).*$"
+      },
+      {
+        "Trigger": "Teams",
+        "Teams": "Away/Away",
+        "Genesys": "Away/Away",
+        "Filter": "^(?!ON_QUEUE\/.*).*$"
+      },
+      {
+        "Trigger": "Teams",
+        "Teams": "Available/Free",
+        "Genesys": "Available",
+        "Filter": "^(?!ON_QUEUE\/.*).*$"
+      },
 
+      {
+        "Trigger": "Genesys",
+        "Genesys": "Busy",
+        "Teams": "Busy"
+      },
+      {
+        "Trigger": "Genesys",
+        "Genesys": "Available",
+        "Teams": "Clear"
+      }
+    ]
+  },
   "Notifications": [
     {
       "Type": "Browser",
