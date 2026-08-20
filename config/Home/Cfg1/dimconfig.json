@@ -3,7 +3,7 @@
 
   "ShowEmbeddedClient": true,
 
-  "HotkeyAnswer": "Ctrl-A",
+  "HotkeyAnswer": "Ctrl-Q",
   "HotkeyDecline": "Ctrl-D",
 
   "WebSocketPort": "9562",
