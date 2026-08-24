@@ -106,7 +106,7 @@
       }
     ]
   },
-  "Notifications": [
+  "Notifications": []
     {
       "Type": "Browser",
       "Name": "Browser Notification 1",
