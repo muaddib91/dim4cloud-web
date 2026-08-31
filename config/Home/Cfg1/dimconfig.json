@@ -48,7 +48,7 @@
       {
         "Trigger": "Teams",
         "Teams": "Busy/Busy",
-        "Genesys": "Busy",
+        "Genesys": "Busy/Busy",
         "Filter": "^(?!ON_QUEUE\/.*).*$"
       },
       {
