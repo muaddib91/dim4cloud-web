@@ -1,5 +1,5 @@
 ﻿/*
-    Swisscom DIM 5.1.8
+    Swisscom DIM 5.1.9
     Copyright(c) by PrimeSoft AG
 */
 class Logger {
