@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <!--
-    Swisscom DIM 5.1.8
+    Swisscom DIM 5.1.9
     Copyright (c) by PrimeSoft AG
 -->
 <html lang="en">
@@ -46,11 +46,11 @@
     </div>
 
     <script src="lib/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="js/logger.js?v=5.1.8"></script>
-    <script type="text/javascript" src="js/embedded-client.js?v=5.1.8"></script>
+    <script type="text/javascript" src="js/logger.js?v=5.1.9"></script>
+    <script type="text/javascript" src="js/embedded-client.js?v=5.1.9"></script>
     <script type="text/javascript">
         const logger = new Logger("Main");
-        const webVersion = "5.1.8";
+        const webVersion = "5.1.9";
 
         const supportedLanguages = ["de", "fr", "en"];
         var envBaseUrl;
@@ -131,8 +131,11 @@
                 postMessage({ type: "configReady", data: { division: division, group: group, envBaseUrl: envBaseUrl } });
             }
 
-            logger.logDebug("Loading embedded framework and waiting for login...");
-            let iframeSrc = `https://apps.${envBaseUrl}/crm/embeddableFramework.html?dedicatedLoginWindow=true&enableFrameworkClientId=true`;
+            const urlParams = new URLSearchParams(window.location.search);
+            let lang = urlParams.get("language");
+
+            logger.logDebug(`Loading embedded framework (${lang}) and waiting for login...`);
+            let iframeSrc = `https://apps.${envBaseUrl}/crm/embeddableFramework.html?dedicatedLoginWindow=true&enableFrameworkClientId=true&GetUserLanguage=${lang}`;
             document.getElementById("iframe").setAttribute("src", iframeSrc);
         }
 
