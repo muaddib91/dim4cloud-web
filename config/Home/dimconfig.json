@@ -1,14 +1,19 @@
 {
   "ShowRingingToaster": true,
 
-  "ShowEmbeddedClient":  true,
+  "ShowEmbeddedClient": true,
 
   "HotkeyAnswer": "Ctrl-A",
   "HotkeyDecline": "Ctrl-D",
 
-  "WebSocketPort": 9562,
+  "WebSocketPort": "9562",
 
   "Browser": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+
+  "FullClient": {
+    "Command": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+    "Arguments": "--app=https://apps.euc2.pure.cloud//"
+  },
 
   "ClipboardDialing": {
     "Enabled": true,
@@ -35,14 +40,14 @@
         "Replacement": "0"
       }
     ],
-    "FormatPatterns": [ "### ### ## ##", "#### ## ### ## ##" ],
-    "TransferAttributes": ["pt_searchvalue", "pt_test"]
+    "FormatPatterns": [ "### ### ## ##", "#### ## ### ## ##" ]
   },
 
   "Notifications": [
     {
       "Type": "Browser",
       "Name": "Browser Notification 1",
+      "CustomBrowserArgs": "--new-window",
       "Filters": [
         {
           "Key": "data.data.direction",
@@ -55,75 +60,21 @@
         {
           "Key": "data.data.attributes.pt_searchvalue",
           "Value": ".*"
+        },
+        {
+          "Key": "data.data.isChat",
+          "Value": "false"
+        },
+        {
+          "Key": "data.data.isEmail",
+          "Value": "false"
+        },
+        {
+          "Key": "data.data.isMessage",
+          "Value": "false"
         }
       ],
-      "Url": "https://www.local.ch/de/s/{data.data.ani}",
-      "TabUrl": "https://www.local.ch/.*"
+      "Url": "https://www.local.ch/de/s/{data.data.ani}"
     }
-  ],
-
-  "TeamsIntegration": {
-    "Enabled": true,
-    "SyncRules": [
-      {
-        "Trigger": "Teams",
-        "Teams": "Busy/Busy",
-        "Genesys": "Busy/Test",
-        "Filter": "^(?!ON_QUEUE\/.*).*$"
-      },
-      {
-        "Trigger": "Teams",
-        "Teams": "Busy/on-the-phone",
-        "Genesys": "Busy",
-        "Filter": "^(?!ON_QUEUE\/.*).*$"
-      },
-      {
-        "Trigger": "Teams",
-        "Teams": "Busy/in-a-meeting",
-        "Genesys": "Meeting/Meeting",
-        "Filter": "^(?!ON_QUEUE\/.*).*$"
-      },
-      {
-        "Trigger": "Teams",
-        "Teams": "Busy/in-presentation",
-        "Genesys": "Meeting/Meeting",
-        "Filter": "^(?!ON_QUEUE\/.*).*$"
-      },
-      {
-        "Trigger": "Teams",
-        "Teams": "DoNotDisturb/*",
-        "Genesys": "Busy/Busy",
-        "Filter": "^(?!ON_QUEUE\/.*).*$"
-      },
-      {
-        "Trigger": "Teams",
-        "Teams": "Away/BeRightBack",
-        "Genesys": "Break/Break",
-        "Filter": "^(?!ON_QUEUE\/.*).*$"
-      },
-      {
-        "Trigger": "Teams",
-        "Teams": "Away/Away",
-        "Genesys": "Away/Away",
-        "Filter": "^(?!ON_QUEUE\/.*).*$"
-      },
-      {
-        "Trigger": "Teams",
-        "Teams": "Available/Free",
-        "Genesys": "Available",
-        "Filter": "^(?!ON_QUEUE\/.*).*$"
-      },
-
-      {
-        "Trigger": "Genesys",
-        "Genesys": "Busy",
-        "Teams": "Busy"
-      },
-      {
-        "Trigger": "Genesys",
-        "Genesys": "Available",
-        "Teams": "Clear"
-      }
-    ]
-  }
+  ]
 }
