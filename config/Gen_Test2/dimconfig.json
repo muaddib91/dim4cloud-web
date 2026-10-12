@@ -1,6 +1,6 @@
 
 {
-  "ShowRingingToaster": true,
+  "ShowRingingToaster": false,
 
   "ShowEmbeddedClient": true,
 
