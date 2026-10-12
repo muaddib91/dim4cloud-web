@@ -1,21 +1,14 @@
-
-
 {
   "ShowRingingToaster": true,
 
-  "ShowEmbeddedClient": true,
+  "ShowEmbeddedClient":  true,
 
-  "HotkeyAnswer": "Ctrl-Q",
+  "HotkeyAnswer": "Ctrl-A",
   "HotkeyDecline": "Ctrl-D",
 
-  "WebSocketPort": "9562",
+  "WebSocketPort": 9562,
 
   "Browser": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-
-  "FullClient": {
-    "Command": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
-    "Arguments": "--app=https://apps.euc2.pure.cloud/directory/"
-  },
 
   "ClipboardDialing": {
     "Enabled": true,
@@ -42,15 +35,40 @@
         "Replacement": "0"
       }
     ],
-    "FormatPatterns": [ "### ### ## ##", "#### ## ### ## ##" ]
+    "FormatPatterns": [ "### ### ## ##", "#### ## ### ## ##" ],
+    "TransferAttributes": ["pt_searchvalue", "pt_test"]
   },
+
+  "Notifications": [
+    {
+      "Type": "Browser",
+      "Name": "Browser Notification 1",
+      "Filters": [
+        {
+          "Key": "data.data.direction",
+          "Value": "Inbound|Internal|Outbound"
+        },
+        {
+          "Key": "data.data.state",
+          "Value": "ALERTING"
+        },
+        {
+          "Key": "data.data.attributes.pt_searchvalue",
+          "Value": ".*"
+        }
+      ],
+      "Url": "https://www.local.ch/de/s/{data.data.ani}",
+      "TabUrl": "https://www.local.ch/.*"
+    }
+  ],
+
   "TeamsIntegration": {
     "Enabled": true,
     "SyncRules": [
       {
         "Trigger": "Teams",
         "Teams": "Busy/Busy",
-        "Genesys": "Busy/Busy",
+        "Genesys": "Busy/Test",
         "Filter": "^(?!ON_QUEUE\/.*).*$"
       },
       {
@@ -107,6 +125,5 @@
         "Teams": "Clear"
       }
     ]
-  },
-  "Notifications": []
+  }
 }
