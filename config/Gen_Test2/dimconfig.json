@@ -97,7 +97,7 @@
       {
         "Trigger": "Genesys",
         "Genesys": "Busy",
-        "Teams": "Busy/Busy"
+        "Teams": "Busy"
       },
       {
         "Trigger": "Genesys",
@@ -107,12 +107,12 @@
       {
         "Trigger": "Genesys",
         "Genesys": "DoNotDisturb",
-        "Teams": "Busy/Busy"
+        "Teams": "Busy"
       },
       {
         "Trigger": "Genesys",
         "Genesys": "OnQueue",
-        "Teams": "Busy/Busy"
+        "Teams": "Busy"
       }
     ]
   },
