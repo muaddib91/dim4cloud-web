@@ -103,6 +103,16 @@
         "Trigger": "Genesys",
         "Genesys": "Available",
         "Teams": "Clear"
+      },
+      {
+        "Trigger": "Genesys",
+        "Genesys": "DoNotDisturb",
+        "Teams": "Busy/Busy"
+      },
+      {
+        "Trigger": "Genesys",
+        "Genesys": "OnQueue",
+        "Teams": "Busy/Busy"
       }
     ]
   },
