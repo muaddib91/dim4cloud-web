@@ -97,7 +97,7 @@
       {
         "Trigger": "Genesys",
         "Genesys": "Busy",
-        "Teams": "Busy"
+        "Teams": "Busy/Busy"
       },
       {
         "Trigger": "Genesys",
