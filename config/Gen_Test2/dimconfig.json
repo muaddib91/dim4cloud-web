@@ -106,8 +106,33 @@
       },
       {
         "Trigger": "Genesys",
-        "Genesys": "DoNotDisturb",
+        "Genesys": "Break",
         "Teams": "Busy"
+      },
+      {
+        "Trigger": "Genesys",
+        "Genesys": "Meal",
+        "Teams": "Busy"
+      },
+      {
+        "Trigger": "Genesys",
+        "Genesys": "Meeting",
+        "Teams": "Busy"
+      },
+      {
+        "Trigger": "Genesys",
+        "Genesys": "Training",
+        "Teams": "Busy"
+      },
+      {
+        "Trigger": "Genesys",
+        "Genesys": "Away",
+        "Teams": "Away"
+      },
+      {
+        "Trigger": "Genesys",
+        "Genesys": "Offline",
+        "Teams": "Offline"
       },
       {
         "Trigger": "Genesys",
