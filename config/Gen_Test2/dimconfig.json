@@ -137,7 +137,7 @@
       {
         "Trigger": "Genesys",
         "Genesys": "ON_QUEUE",
-        "Teams": "Busy"
+        "Teams": "DoNotDisturb"
       }
     ]
   },
